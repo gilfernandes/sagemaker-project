@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Sentiment Analysis Web App</title>
-        <meta charset="utf-8">
-        <meta name="viewport"  content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+    <title>Sentiment Analysis Web App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <script>
-         "use strict";
-         function submitForm(oFormElement) {
-             var xhr = new XMLHttpRequest();
+    <script>
+        "use strict";
 
-             $.ajax({
+        function submitForm(oFormElement) {
+            var xhr = new XMLHttpRequest();
+
+            $.ajax({
                 contentType: 'application/json',
                 data: JSON.stringify({
                     "body": $("#review").val()
                 }),
                 dataType: 'json',
-                success: function(data){
+                success: function (data) {
                     console.log("device control succeeded: ");
                     var resultElement = document.getElementById('result');
                     console.log(data.body);
@@ -32,7 +33,7 @@
                         resultElement.innerHTML = 'Your review was NEGATIVE!';
                     }
                 },
-                error: function(){
+                error: function () {
                     console.log("Device control failed");
                 },
                 processData: false,
@@ -40,27 +41,27 @@
                 url: $("form:first").attr('action')
             });
 
-             return false;
-         }
-        </script>
+            return false;
+        }
+    </script>
 
-    </head>
-    <body>
+</head>
+<body>
 
-        <div class="container">
-            <h1>Is your review positive, or negative?</h1>
-            <p>Enter your review below and click submit to find out...</p>
-            <form method="POST"
-                  action="https://4rhuw5qez4.execute-api.eu-west-1.amazonaws.com/prod"
-                  onsubmit="return submitForm(this);" >                     <!-- HERE IS WHERE YOU NEED TO ENTER THE API URL -->
-                <div class="form-group">
-                    <label for="review">Review:</label>
-                    <textarea class="form-control"  rows="5" id="review">Please write your review here.</textarea>
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-            <h4 id="text" style="font-style: italic;"></h4>
-            <h1 class="bg-success" id="result"></h1>
+<div class="container">
+    <h1>Is your review positive, or negative?</h1>
+    <p>Enter your review below and click submit to find out...</p>
+    <form method="POST"
+          action="https://4rhuw5qez4.execute-api.eu-west-1.amazonaws.com/prod"
+          onsubmit="return submitForm(this);">                     <!-- HERE IS WHERE YOU NEED TO ENTER THE API URL -->
+        <div class="form-group">
+            <label for="review">Review:</label>
+            <textarea class="form-control" rows="5" id="review">Please write your review here.</textarea>
         </div>
-    </body>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    <h4 id="text" style="font-style: italic;"></h4>
+    <h1 class="bg-success" id="result"></h1>
+</div>
+</body>
 </html>
